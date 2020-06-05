@@ -17,6 +17,11 @@
   -webkit-text-fill-color: transparent;
 }
 
-.NavBar-slider {
-  width: 40%;
+.NavBar-item {
+  flex-basis: 33%;
+}
+
+.NavBar-select {
+  display: flex;
+  justify-content: flex-end;
 }
