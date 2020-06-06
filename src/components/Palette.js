@@ -14,8 +14,8 @@ export default class Palette extends Component {
     this.setState({ level });
   };
 
-  handleChangeFormat = (event) => {
-    this.setState({ format: event.target.value });
+  handleChangeFormat = (value) => {
+    this.setState({ format: value });
   };
 
   render() {

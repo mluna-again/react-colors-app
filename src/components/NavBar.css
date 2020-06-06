@@ -25,3 +25,20 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.NavBar-alert {
+  background-color: #10af33;
+  padding: 20px 70px;
+  border-radius: 10px;
+  color: #eee;
+  position: relative;
+}
+.NavBar-alert-text {
+  font-size: 1.5rem;
+}
+.NavBar-alert-x {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  cursor: pointer;
+}
