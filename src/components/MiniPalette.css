@@ -1,0 +1,31 @@
+.MiniPalette {
+  flex-basis: 29%;
+  margin: 2%;
+  background-color: aliceblue;
+  border-radius: 5px;
+}
+
+.MiniPalette a {
+  text-decoration: none;
+}
+
+.MiniPalette-color {
+  width: 20%;
+  padding-top: 20%;
+}
+
+.MiniPalette-colors {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 5px 5px 0 0;
+}
+
+.MiniPalette-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 0;
+  color: #000;
+}
