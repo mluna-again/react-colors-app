@@ -12,8 +12,9 @@
   justify-content: center;
 }
 
-.PaletteList-logo {
-  font-size: 2.2rem;
+.PaletteList-palette {
+  flex-basis: 29%;
+  margin: 2%;
 }
 
 .PaletteList-title {
@@ -24,4 +25,26 @@
   -webkit-text-fill-color: transparent;
   font-size: 2.2rem;
   display: inline-block;
+}
+
+.PaletteList-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 2.5%;
+}
+
+.PaletteList-btn {
+  background-color: crimson;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 15px;
+  align-self: stretch;
+  color: aliceblue;
+  transition: box-shadow 0.5s;
+}
+
+.PaletteList-btn:hover {
+  cursor: pointer;
+  box-shadow: 0 5px 10px #00000065;
 }

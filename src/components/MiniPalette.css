@@ -1,8 +1,10 @@
 .MiniPalette {
-  flex-basis: 29%;
-  margin: 2%;
   background-color: aliceblue;
   border-radius: 5px;
+}
+
+.MiniPalette:hover {
+  cursor: pointer;
 }
 
 .MiniPalette a {
