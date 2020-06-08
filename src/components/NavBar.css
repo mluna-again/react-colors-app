@@ -8,13 +8,19 @@
 .NavBar-logo {
   font-size: 26px;
   font-weight: 600;
+  text-decoration: none;
 }
 
 .NavBar-logo-text {
   background-color: #f7b42c;
   background-image: linear-gradient(315deg, #f7b42c 0%, #fc575e 74%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.NavBar a {
+  text-decoration: none;
 }
 
 .NavBar-item {
