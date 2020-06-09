@@ -29,11 +29,12 @@ function App() {
           return <Palette palette={palette} />;
         }}
       />
+      <Route
+        exact
+        path="/palette/:paletteId/:colorId"
+        render={() => <h1>Hemlo</h1>}
+      />
     </Switch>
-
-    // <div className="App">
-    //   <Palette palette={generatePalette(seedColors[5])} />
-    // </div>
   );
 }
 

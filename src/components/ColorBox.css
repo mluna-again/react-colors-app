@@ -107,3 +107,8 @@
   background-color: #ffffff8e;
   cursor: pointer;
 }
+
+a .ColorBox-more {
+  text-decoration: none;
+  color: #000;
+}
