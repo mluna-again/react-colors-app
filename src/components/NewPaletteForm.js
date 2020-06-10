@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -12,6 +12,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Button from "@material-ui/core/Button";
 import { ChromePicker } from "react-color";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import DraggableColorBox from "./DraggableColorBox";
 
 import "./NewPaletteForm.css";
@@ -93,10 +94,30 @@ export default function NewPaletteForm() {
   const handleChangeColor = (color) => {
     setColor(color.hex);
   };
-  const [colors, setColors] = useState(["crimson", "purple"]);
+  const [colors, setColors] = useState([]);
   const handleAddColor = () => {
-    setColors([...colors, color]);
+    console.log(":(");
+    const newColor = {
+      color,
+      name: newName,
+    };
+    setColors([...colors, newColor]);
+    setNewName("");
   };
+
+  const [newName, setNewName] = useState("");
+  const handleNameChange = (event) => setNewName(event.target.value);
+
+  useEffect(() => {
+    ValidatorForm.addValidationRule("isUnique", (value) => {
+      const isUnique = colors.find(
+        (color) => color.name.toLowerCase() === value.toLowerCase()
+      );
+      console.log(isUnique);
+      if (!isUnique) return true;
+      return false;
+    });
+  });
 
   return (
     <div className={classes.root}>
@@ -146,13 +167,21 @@ export default function NewPaletteForm() {
             Random color
           </Button>
           <ChromePicker color={color} onChange={handleChangeColor} />
-          <Button
-            variant="contained"
-            style={{ backgroundColor: color }}
-            onClick={handleAddColor}
-          >
-            Add color
-          </Button>
+          <ValidatorForm onSubmit={handleAddColor}>
+            <TextValidator
+              value={newName}
+              onChange={handleNameChange}
+              validators={["required", "isUnique"]}
+              errorMessages={["A name is required", "Name should be unique"]}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              style={{ backgroundColor: color }}
+            >
+              Add color
+            </Button>
+          </ValidatorForm>
         </div>
       </Drawer>
       <main
