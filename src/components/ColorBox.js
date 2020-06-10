@@ -16,7 +16,7 @@ export default class ColorBox extends Component {
   };
 
   render() {
-    const { name, color } = this.props;
+    const { name, color, paletteId, id, showLink, height } = this.props;
     const overlayClasses = `ColorBox-copy-overlay ${
       this.state.isCopied ? "active-overlay" : ""
     }`;
@@ -26,7 +26,10 @@ export default class ColorBox extends Component {
 
     return (
       <CopyToClipboard text={color} onCopy={this.handleCopy}>
-        <div className="ColorBox" style={{ backgroundColor: color }}>
+        <div
+          className="ColorBox"
+          style={{ backgroundColor: color, height: height && height }}
+        >
           {/* Overlay starts here... */}
           <div style={{ backgroundColor: color }} className={overlayClasses} />
           <div className={messageClasses}>
@@ -42,9 +45,14 @@ export default class ColorBox extends Component {
             <button className="ColorBox-copy-btn">Copy</button>
           </div>
 
-          <Link to="/" onClick={(e) => e.stopPropagation()}>
-            <span className="ColorBox-more">More</span>
-          </Link>
+          {showLink && (
+            <Link
+              to={`/palette/${paletteId}/${id}`}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <span className="ColorBox-more">More</span>
+            </Link>
+          )}
         </div>
       </CopyToClipboard>
     );

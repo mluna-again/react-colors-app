@@ -24,7 +24,7 @@
 }
 
 .NavBar-item {
-  flex-basis: 33%;
+  flex-grow: 1;
 }
 
 .NavBar-select {

@@ -31,7 +31,7 @@ export default class NavBar extends Component {
   };
 
   render() {
-    const { level, handleChangeLevel, format } = this.props;
+    const { level, handleChangeLevel, format, showSlider } = this.props;
     const { showSnackBar } = this.state;
     return (
       <header className="NavBar">
@@ -44,18 +44,20 @@ export default class NavBar extends Component {
             <span className="NavBar-logo-text">react colors</span>
           </Link>
         </div>
-        <div className="NavBar-slider NavBar-item">
-          <span>Level: {level}</span>
-          <div>
-            <Slider
-              defaultValue={level}
-              min={100}
-              max={900}
-              step={100}
-              onAfterChange={handleChangeLevel}
-            />
+        {showSlider ? (
+          <div className="NavBar-slider NavBar-item">
+            <span>Level: {level}</span>
+            <div>
+              <Slider
+                defaultValue={level}
+                min={100}
+                max={900}
+                step={100}
+                onAfterChange={handleChangeLevel}
+              />
+            </div>
           </div>
-        </div>
+        ) : null}
         <div className="NavBar-select NavBar-item">
           <FormControl>
             <InputLabel id="encoding">Encoding</InputLabel>

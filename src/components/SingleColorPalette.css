@@ -1,0 +1,38 @@
+.SingleColorPalette {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.SingleColorPalette-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  height: 88%;
+  width: 100%;
+}
+
+.SingleColorPalette-box {
+  height: 50%;
+}
+
+.SingleColorPalette-go-back {
+  height: 50%;
+  background-color: #000;
+  flex-basis: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: aliceblue;
+}
+
+.SingleColorPalette-go-back-btn {
+  width: 100px;
+  height: 30px;
+  padding: 5px 15px;
+  outline: none;
+  background-color: #ffffff4d;
+  font-size: 1rem;
+  color: #fff;
+  text-transform: uppercase;
+  border: none;
+  text-decoration: none;
+}
