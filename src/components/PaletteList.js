@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import MiniPalette from "./MiniPalette";
 
@@ -24,12 +25,14 @@ export default class PaletteList extends Component {
     });
     return (
       <div className="PaletteList">
-        <div className="PaletteList-header">
+        <nav className="PaletteList-header">
           <div>
             <h1 className="PaletteList-title">react colors</h1>
           </div>
-          <button className="PaletteList-btn">Create palette</button>
-        </div>
+          <Link to="/palette/new" className="PaletteList-btn">
+            Create palette
+          </Link>
+        </nav>
         <div className="PaletteList-palettes">{palettes}</div>
       </div>
     );
