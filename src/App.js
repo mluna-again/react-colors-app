@@ -22,6 +22,10 @@ function App() {
     setPalettes([...palettes, newPalette]);
   };
 
+  const itExists = (paletteId) => {
+    return palettes.some((palette) => palette.id === paletteId);
+  };
+
   return (
     <Switch>
       <Route
@@ -33,7 +37,11 @@ function App() {
         exact
         path="/palette/new"
         render={(props) => (
-          <NewPaletteForm savePalette={savePalette} {...props} />
+          <NewPaletteForm
+            itExists={itExists}
+            savePalette={savePalette}
+            {...props}
+          />
         )}
       />
       <Route

@@ -3,4 +3,25 @@
   width: 20%;
   cursor: pointer;
   display: inline-block;
+  position: relative;
+}
+
+.DraggableColorBox-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  color: aliceblue;
+  padding-left: 10px;
+}
+
+.DraggableColorBox-icon svg {
+  fill: #f0f8ff79;
+}
+
+.DraggableColorBox:hover .DraggableColorBox-icon svg {
+  fill: white;
 }

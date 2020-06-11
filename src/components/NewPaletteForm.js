@@ -107,7 +107,24 @@ export default function NewPaletteForm(props) {
   const [newName, setNewName] = useState("");
   const handleNameChange = (event) => setNewName(event.target.value);
 
-  const [paletteName, setPaletteName] = useState("Trolleado a a");
+  const [paletteName, setPaletteName] = useState("");
+  const handlePaletteNameChange = (event) => setPaletteName(event.target.value);
+
+  const toId = (stringName) => stringName.toLowerCase().replace(/ /g, "-");
+  const savePalette = () => {
+    const newPalette = {
+      paletteName: paletteName,
+      colors,
+      id: toId(paletteName),
+    };
+    props.savePalette(newPalette);
+    props.history.push("/");
+  };
+
+  const deleteColor = (colorName) => {
+    const newColors = colors.filter((color) => color.name !== colorName);
+    setColors(newColors);
+  };
 
   useEffect(() => {
     ValidatorForm.addValidationRule("isUnique", (value) => {
@@ -117,17 +134,12 @@ export default function NewPaletteForm(props) {
       if (!isUnique) return true;
       return false;
     });
-  });
 
-  const savePalette = () => {
-    const newPalette = {
-      paletteName: paletteName,
-      colors,
-      id: paletteName.toLowerCase().replace(/ /g, "-"),
-    };
-    props.savePalette(newPalette);
-    props.history.push("/");
-  };
+    ValidatorForm.addValidationRule("isUniqueName", (value) => {
+      if (props.itExists(toId(value))) return false;
+      return true;
+    });
+  });
 
   return (
     <div className={classes.root}>
@@ -152,9 +164,21 @@ export default function NewPaletteForm(props) {
           <Typography variant="h6" noWrap>
             Create palette
           </Typography>
-          <Button variant="contained" color="primary" onClick={savePalette}>
-            Save
-          </Button>
+          <ValidatorForm onSubmit={savePalette}>
+            <TextValidator
+              label="Palette name"
+              value={paletteName}
+              onChange={handlePaletteNameChange}
+              validators={["required", "isUniqueName"]}
+              errorMessages={[
+                "Palettes need a name",
+                "That palette already exists",
+              ]}
+            />
+            <Button variant="contained" color="primary" type="submit">
+              Save
+            </Button>
+          </ValidatorForm>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -205,7 +229,11 @@ export default function NewPaletteForm(props) {
       >
         <div className={classes.drawerHeader} />
         {colors.map((color) => (
-          <DraggableColorBox color={color} />
+          <DraggableColorBox
+            color={color}
+            deleteColor={deleteColor}
+            key={color.name}
+          />
         ))}
       </main>
     </div>
