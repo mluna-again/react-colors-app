@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NewPaletteForm() {
+export default function NewPaletteForm(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
 
@@ -96,7 +96,6 @@ export default function NewPaletteForm() {
   };
   const [colors, setColors] = useState([]);
   const handleAddColor = () => {
-    console.log(":(");
     const newColor = {
       color,
       name: newName,
@@ -108,22 +107,34 @@ export default function NewPaletteForm() {
   const [newName, setNewName] = useState("");
   const handleNameChange = (event) => setNewName(event.target.value);
 
+  const [paletteName, setPaletteName] = useState("Trolleado a a");
+
   useEffect(() => {
     ValidatorForm.addValidationRule("isUnique", (value) => {
       const isUnique = colors.find(
         (color) => color.name.toLowerCase() === value.toLowerCase()
       );
-      console.log(isUnique);
       if (!isUnique) return true;
       return false;
     });
   });
+
+  const savePalette = () => {
+    const newPalette = {
+      paletteName: paletteName,
+      colors,
+      id: paletteName.toLowerCase().replace(/ /g, "-"),
+    };
+    props.savePalette(newPalette);
+    props.history.push("/");
+  };
 
   return (
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
         position="fixed"
+        color="default"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
@@ -139,8 +150,11 @@ export default function NewPaletteForm() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Persistent drawer
+            Create palette
           </Typography>
+          <Button variant="contained" color="primary" onClick={savePalette}>
+            Save
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer
