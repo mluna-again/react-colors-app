@@ -13,7 +13,8 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Button from "@material-ui/core/Button";
 import { ChromePicker } from "react-color";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import DraggableColorBox from "./DraggableColorBox";
+import { arrayMove } from "react-sortable-hoc";
+import DraggableColorList from "./DraggableColorList";
 
 import "./NewPaletteForm.css";
 
@@ -126,6 +127,10 @@ export default function NewPaletteForm(props) {
     setColors(newColors);
   };
 
+  const onSortEnd = ({ oldIndex, newIndex }) => {
+    setColors(arrayMove(colors, oldIndex, newIndex));
+  };
+
   useEffect(() => {
     ValidatorForm.addValidationRule("isUnique", (value) => {
       const isUnique = colors.find(
@@ -228,13 +233,13 @@ export default function NewPaletteForm(props) {
         })}
       >
         <div className={classes.drawerHeader} />
-        {colors.map((color) => (
-          <DraggableColorBox
-            color={color}
-            deleteColor={deleteColor}
-            key={color.name}
-          />
-        ))}
+        <DraggableColorList
+          deleteColor={deleteColor}
+          colors={colors}
+          axis={"xy"}
+          onSortEnd={onSortEnd}
+          distance={2}
+        />
       </main>
     </div>
   );
