@@ -41,6 +41,7 @@ function App() {
             itExists={itExists}
             savePalette={savePalette}
             {...props}
+            defaultPalette={palettes[0]}
           />
         )}
       />

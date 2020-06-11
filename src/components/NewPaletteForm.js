@@ -95,7 +95,7 @@ export default function NewPaletteForm(props) {
   const handleChangeColor = (color) => {
     setColor(color.hex);
   };
-  const [colors, setColors] = useState([]);
+  const [colors, setColors] = useState(props.defaultPalette.colors);
   const handleAddColor = () => {
     const newColor = {
       color,
@@ -130,6 +130,13 @@ export default function NewPaletteForm(props) {
   const onSortEnd = ({ oldIndex, newIndex }) => {
     setColors(arrayMove(colors, oldIndex, newIndex));
   };
+
+  const randomColor = () => {
+    const color = Math.floor(Math.random() * 16777215).toString(16);
+    setColor(`#${color}`);
+  };
+
+  const isPaletteFull = colors.length >= 20;
 
   useEffect(() => {
     ValidatorForm.addValidationRule("isUnique", (value) => {
@@ -203,10 +210,19 @@ export default function NewPaletteForm(props) {
         <Divider />
         <div className="NewPaletteForm-drawer-content">
           <Typography variant="h4">Design your palette</Typography>
-          <Button variant="contained" color="secondary">
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => setColors([])}
+          >
             Clear
           </Button>
-          <Button variant="contained" color="primary">
+          <Button
+            disabled={isPaletteFull}
+            variant="contained"
+            color={isPaletteFull ? "default" : "primary"}
+            onClick={randomColor}
+          >
             Random color
           </Button>
           <ChromePicker color={color} onChange={handleChangeColor} />
@@ -220,9 +236,13 @@ export default function NewPaletteForm(props) {
             <Button
               type="submit"
               variant="contained"
-              style={{ backgroundColor: color }}
+              style={{
+                backgroundColor: isPaletteFull ? "crimson" : color,
+                color: isPaletteFull ? "aliceblue" : "black",
+              }}
+              disabled={isPaletteFull}
             >
-              Add color
+              {isPaletteFull ? "Palette full" : "Add color"}
             </Button>
           </ValidatorForm>
         </div>
