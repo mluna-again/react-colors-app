@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import clsx from "clsx";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
@@ -12,14 +13,35 @@ import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import useStyles from "./NewPaletteFormStyles";
 
 export default function NewPaletteNav(props) {
-  const classes = useStyles();
   const {
     isDrawerOpen,
     handleDrawerOpen,
     handleSavePalette,
     paletteName,
     handlePaletteNameChange,
+    colors,
+    itExists,
   } = props;
+
+  useEffect(() => {
+    const toId = (stringName) => stringName.toLowerCase().replace(/ /g, "-");
+
+    ValidatorForm.addValidationRule("isUnique", (value) => {
+      const isUnique = colors.find(
+        (color) => color.name.toLowerCase() === value.toLowerCase()
+      );
+      if (!isUnique) return true;
+      return false;
+    });
+
+    ValidatorForm.addValidationRule("isUniqueName", (value) => {
+      if (itExists(toId(value))) return false;
+      return true;
+    });
+  });
+
+  const classes = useStyles();
+
   return (
     <div>
       <CssBaseline />
@@ -54,6 +76,11 @@ export default function NewPaletteNav(props) {
                 "That palette already exists",
               ]}
             />
+            <Link to="/">
+              <Button variant="contained" color="secondary">
+                Go back
+              </Button>
+            </Link>
             <Button variant="contained" color="primary" type="submit">
               Save
             </Button>

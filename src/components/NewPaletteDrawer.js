@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Drawer from "@material-ui/core/Drawer";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
@@ -22,25 +22,7 @@ export default function NewPaletteDrawer(props) {
     paletteName,
     handleNameChange,
     clearPalette,
-    colors,
   } = props;
-
-  useEffect(() => {
-    const toId = (stringName) => stringName.toLowerCase().replace(/ /g, "-");
-
-    ValidatorForm.addValidationRule("isUnique", (value) => {
-      const isUnique = colors.find(
-        (color) => color.name.toLowerCase() === value.toLowerCase()
-      );
-      if (!isUnique) return true;
-      return false;
-    });
-
-    ValidatorForm.addValidationRule("isUniqueName", (value) => {
-      if (props.itExists(toId(value))) return false;
-      return true;
-    });
-  });
 
   const classes = useStyles();
 

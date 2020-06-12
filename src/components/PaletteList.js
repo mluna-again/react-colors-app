@@ -13,10 +13,9 @@ export default class PaletteList extends Component {
   render() {
     const palettes = this.props.palettes.map((palette) => {
       return (
-        <div className="PaletteList-palette">
+        <div className="PaletteList-palette" key={palette.id}>
           <MiniPalette
             handleClick={this.goToPalette}
-            key={palette.id}
             title={palette.paletteName}
             {...palette}
           />

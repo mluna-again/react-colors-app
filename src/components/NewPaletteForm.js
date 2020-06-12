@@ -75,6 +75,8 @@ export default function NewPaletteForm(props) {
         handleSavePalette={savePalette}
         paletteName={paletteName}
         handlePaletteNameChange={handlePaletteNameChange}
+        colors={colors}
+        itExists={props.itExists}
       />
       <NewPaletteDrawer
         isDrawerOpen={isDrawerOpen}
@@ -87,7 +89,6 @@ export default function NewPaletteForm(props) {
         paletteName={paletteName}
         handleChangeName={handleNameChange}
         handleClearPalette={clearPalette}
-        colors={colors}
       />
 
       <main
