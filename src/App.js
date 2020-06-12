@@ -38,7 +38,13 @@ function App() {
       <Route
         exact
         path="/"
-        render={(props) => <PaletteList {...props} palettes={palettes} />}
+        render={(props) => (
+          <PaletteList
+            {...props}
+            palettes={palettes}
+            updatePalettes={setPalettes}
+          />
+        )}
       />
       <Route
         exact

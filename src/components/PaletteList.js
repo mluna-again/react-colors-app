@@ -10,6 +10,13 @@ export default class PaletteList extends Component {
     this.props.history.push(`/palette/${id}`);
   };
 
+  deletePalette = (paletteId) => {
+    const newPalettes = this.props.palettes.filter(
+      (palette) => palette.id !== paletteId
+    );
+    this.props.updatePalettes(newPalettes);
+  };
+
   render() {
     const palettes = this.props.palettes.map((palette) => {
       return (
@@ -18,6 +25,7 @@ export default class PaletteList extends Component {
             handleClick={this.goToPalette}
             title={palette.paletteName}
             {...palette}
+            deletePalette={this.deletePalette}
           />
         </div>
       );
