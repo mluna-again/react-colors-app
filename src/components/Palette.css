@@ -5,6 +5,12 @@
   overflow: hidden;
 }
 
+@media only screen and (max-width: 900px) {
+  .Palette {
+    overflow: scroll;
+  }
+}
+
 .Palette-colors {
   height: 88%;
   width: 100%;

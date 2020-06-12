@@ -24,7 +24,6 @@ export default function NewPaletteNav(props) {
     handlePaletteNameChange,
     colors,
     itExists,
-    setEmoji,
   } = props;
 
   useEffect(() => {

@@ -6,6 +6,17 @@
   position: relative;
 }
 
+@media only screen and (max-width: 600px) {
+  .DraggableColorBox {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 900px) and (min-width: 600px) {
+  .DraggableColorBox {
+    width: 50%;
+  }
+}
+
 .DraggableColorBox-content {
   display: flex;
   justify-content: space-between;

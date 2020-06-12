@@ -78,7 +78,6 @@ export default function NewPaletteForm(props) {
         handlePaletteNameChange={handlePaletteNameChange}
         colors={colors}
         itExists={props.itExists}
-
       />
       <NewPaletteDrawer
         isDrawerOpen={isDrawerOpen}
@@ -100,6 +99,7 @@ export default function NewPaletteForm(props) {
       >
         <div className={classes.drawerHeader} />
         <DraggableColorList
+          className="NewPaletteForm-box"
           deleteColor={deleteColor}
           colors={colors}
           axis={"xy"}
