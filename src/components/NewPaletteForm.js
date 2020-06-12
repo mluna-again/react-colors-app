@@ -39,12 +39,13 @@ export default function NewPaletteForm(props) {
   const [paletteName, setPaletteName] = useState("");
   const handlePaletteNameChange = (event) => setPaletteName(event.target.value);
 
-  const savePalette = () => {
+  const savePalette = (emoji) => {
     const toId = (stringName) => stringName.toLowerCase().replace(/ /g, "-");
     const newPalette = {
-      paletteName: paletteName,
+      paletteName,
       colors,
       id: toId(paletteName),
+      emoji,
     };
     props.savePalette(newPalette);
     props.history.push("/");
@@ -77,6 +78,7 @@ export default function NewPaletteForm(props) {
         handlePaletteNameChange={handlePaletteNameChange}
         colors={colors}
         itExists={props.itExists}
+
       />
       <NewPaletteDrawer
         isDrawerOpen={isDrawerOpen}

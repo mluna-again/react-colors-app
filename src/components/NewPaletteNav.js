@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -8,9 +8,11 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Button from "@material-ui/core/Button";
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import { ValidatorForm } from "react-material-ui-form-validator";
 
 import useStyles from "./NewPaletteFormStyles";
+import NewPalettePopup from "./NewPalettePopup";
+import NewPaletteEmojiPicker from "./NewPaletteEmojiPicker";
 import "./NewPaletteNav.css";
 
 export default function NewPaletteNav(props) {
@@ -22,6 +24,7 @@ export default function NewPaletteNav(props) {
     handlePaletteNameChange,
     colors,
     itExists,
+    setEmoji,
   } = props;
 
   useEffect(() => {
@@ -43,6 +46,14 @@ export default function NewPaletteNav(props) {
 
   const classes = useStyles();
 
+  const preSavePalette = () => {
+    setPopupOpen(true);
+  };
+
+  const [popupOpen, setPopupOpen] = useState(false);
+
+  const [emojiPickerOpen, setEmojiPickerOpen] = useState(false);
+
   return (
     <div>
       <CssBaseline />
@@ -53,6 +64,19 @@ export default function NewPaletteNav(props) {
           [classes.appBarShift]: isDrawerOpen,
         })}
       >
+        <NewPalettePopup
+          popupOpen={popupOpen}
+          setPopupOpen={setPopupOpen}
+          savePalette={handleSavePalette}
+          handlePaletteNameChange={handlePaletteNameChange}
+          paletteName={paletteName}
+          openEmojiPicker={setEmojiPickerOpen}
+        />
+        <NewPaletteEmojiPicker
+          show={emojiPickerOpen}
+          close={setEmojiPickerOpen}
+          savePalette={handleSavePalette}
+        />
         <Toolbar className="NewPaletteNav">
           <IconButton
             color="inherit"
@@ -67,21 +91,13 @@ export default function NewPaletteNav(props) {
             Create palette
           </Typography>
           <div className="NewPaletteNav-form">
-            <ValidatorForm onSubmit={handleSavePalette}>
-              <TextValidator
-                label="Palette name"
-                value={paletteName}
-                onChange={handlePaletteNameChange}
-                validators={["required", "isUniqueName"]}
-                errorMessages={[
-                  "Palettes need a name",
-                  "That palette already exists",
-                ]}
-              />
-              <Button variant="contained" color="primary" type="submit">
-                Save
-              </Button>
-            </ValidatorForm>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={preSavePalette}
+            >
+              Save
+            </Button>
             <Link to="/">
               <Button variant="contained" color="secondary">
                 Go back
