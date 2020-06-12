@@ -8,6 +8,8 @@ import NewPaletteForm from "./components/NewPaletteForm";
 import seedColors from "./seedColors";
 import { generatePalette } from "./colorHelpers";
 
+import "./App.css";
+
 function App() {
   const [palettes, setPalettes] = useState(seedColors);
 

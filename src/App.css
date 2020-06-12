@@ -1,5 +1,19 @@
-.App {
-  text-align: center;
+.mt-8 {
+  margin-top: 16px !important;
 }
 
-.App-logo {
+.mb-8 {
+  margin-bottom: 16px !important;
+}
+
+.m-4 {
+  margin: 8px !important;
+}
+
+.d-b {
+  display: block;
+}
+
+.mw {
+  width: 100%;
+}

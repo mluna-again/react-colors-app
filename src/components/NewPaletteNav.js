@@ -11,6 +11,7 @@ import Button from "@material-ui/core/Button";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 import useStyles from "./NewPaletteFormStyles";
+import "./NewPaletteNav.css";
 
 export default function NewPaletteNav(props) {
   const {
@@ -52,7 +53,7 @@ export default function NewPaletteNav(props) {
           [classes.appBarShift]: isDrawerOpen,
         })}
       >
-        <Toolbar>
+        <Toolbar className="NewPaletteNav">
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -65,26 +66,28 @@ export default function NewPaletteNav(props) {
           <Typography variant="h6" noWrap>
             Create palette
           </Typography>
-          <ValidatorForm onSubmit={handleSavePalette}>
-            <TextValidator
-              label="Palette name"
-              value={paletteName}
-              onChange={handlePaletteNameChange}
-              validators={["required", "isUniqueName"]}
-              errorMessages={[
-                "Palettes need a name",
-                "That palette already exists",
-              ]}
-            />
+          <div className="NewPaletteNav-form">
+            <ValidatorForm onSubmit={handleSavePalette}>
+              <TextValidator
+                label="Palette name"
+                value={paletteName}
+                onChange={handlePaletteNameChange}
+                validators={["required", "isUniqueName"]}
+                errorMessages={[
+                  "Palettes need a name",
+                  "That palette already exists",
+                ]}
+              />
+              <Button variant="contained" color="primary" type="submit">
+                Save
+              </Button>
+            </ValidatorForm>
             <Link to="/">
               <Button variant="contained" color="secondary">
                 Go back
               </Button>
             </Link>
-            <Button variant="contained" color="primary" type="submit">
-              Save
-            </Button>
-          </ValidatorForm>
+          </div>
         </Toolbar>
       </AppBar>
     </div>

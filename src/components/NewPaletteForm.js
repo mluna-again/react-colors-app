@@ -86,8 +86,8 @@ export default function NewPaletteForm(props) {
         color={color}
         handleChangeColor={handleChangeColor}
         handleAddColor={handleAddColor}
-        paletteName={paletteName}
-        handleChangeName={handleNameChange}
+        colorName={newName}
+        handleNameChange={handleNameChange}
         handleClearPalette={clearPalette}
       />
 

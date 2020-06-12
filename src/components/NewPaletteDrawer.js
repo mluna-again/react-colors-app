@@ -9,6 +9,7 @@ import { ChromePicker } from "react-color";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 import useStyles from "./NewPaletteFormStyles";
+import "./NewPaletteDrawer.css";
 
 export default function NewPaletteDrawer(props) {
   const {
@@ -19,7 +20,7 @@ export default function NewPaletteDrawer(props) {
     color,
     handleChangeColor,
     handleAddColor,
-    paletteName,
+    colorName,
     handleNameChange,
     clearPalette,
   } = props;
@@ -44,38 +45,52 @@ export default function NewPaletteDrawer(props) {
         </div>
         <Divider />
         <div className="NewPaletteForm-drawer-content">
-          <Typography variant="h4">Design your palette</Typography>
-          <Button variant="contained" color="secondary" onClick={clearPalette}>
-            Clear
-          </Button>
-          <Button
-            disabled={isPaletteFull}
-            variant="contained"
-            color={isPaletteFull ? "default" : "primary"}
-            onClick={randomColor}
-          >
-            Random color
-          </Button>
-          <ChromePicker color={color} onChange={handleChangeColor} />
-          <ValidatorForm onSubmit={handleAddColor}>
-            <TextValidator
-              value={paletteName}
-              onChange={handleNameChange}
-              validators={["required", "isUnique"]}
-              errorMessages={["A name is required", "Name should be unique"]}
-            />
-            <Button
-              type="submit"
-              variant="contained"
-              style={{
-                backgroundColor: isPaletteFull ? "crimson" : color,
-                color: isPaletteFull ? "aliceblue" : "black",
-              }}
-              disabled={isPaletteFull}
-            >
-              {isPaletteFull ? "Palette full" : "Add color"}
-            </Button>
-          </ValidatorForm>
+          <div className="NewPaletteForm-drawer-heading">
+            <Typography variant="h4">Design your palette</Typography>
+            <div className="m-4">
+              <Button
+                className="m-4"
+                variant="contained"
+                color="secondary"
+                onClick={clearPalette}
+              >
+                Clear
+              </Button>
+              <Button
+                className="m-4"
+                disabled={isPaletteFull}
+                variant="contained"
+                color={isPaletteFull ? "default" : "primary"}
+                onClick={randomColor}
+              >
+                Random color
+              </Button>
+            </div>
+          </div>
+          <div className="NewPaletteForm-drawer-main">
+            <ChromePicker color={color} onChange={handleChangeColor} />
+            <ValidatorForm onSubmit={handleAddColor} className="mt-8">
+              <TextValidator
+                className="mw mb-8"
+                value={colorName}
+                onChange={handleNameChange}
+                validators={["required", "isUnique"]}
+                errorMessages={["A name is required", "Name should be unique"]}
+              />
+              <Button
+                className="mw"
+                type="submit"
+                variant="contained"
+                style={{
+                  backgroundColor: isPaletteFull ? "crimson" : color,
+                  color: isPaletteFull ? "aliceblue" : "black",
+                }}
+                disabled={isPaletteFull}
+              >
+                {isPaletteFull ? "Palette full" : "Add color"}
+              </Button>
+            </ValidatorForm>
+          </div>
         </div>
       </Drawer>
     </div>

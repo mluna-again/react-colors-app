@@ -1,0 +1,12 @@
+.NewPaletteNav {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.NewPaletteNav-form a {
+  text-decoration: none;
+}
+
+.NewPaletteNav-form {
+  display: flex;
+}
